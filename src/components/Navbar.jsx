@@ -22,7 +22,10 @@ export default function Navbar() {
         <Link to="/my-event">My Event</Link>
 
         {!user ? (
+          <>
           <Link to="/login" className="bg-white text-blue-600 px-3 py-1 rounded">Sign In</Link>
+          <Link to="/register" className="bg-white text-blue-600 px-3 py-1 rounded">Register</Link>
+          </>
         ) : (
           <div className="relative group">
             <img
