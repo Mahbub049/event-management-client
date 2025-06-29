@@ -4,46 +4,71 @@ import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
-    const [form, setForm] = useState({ email: '', password: '' });
-    const [error, setError] = useState('');
-    const { loginUser } = useContext(AuthContext);
-    const navigate = useNavigate();
+  const [form, setForm] = useState({ email: '', password: '' });
+  const [error, setError] = useState('');
+  const { loginUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setError('');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
 
-        if (!form.email || !form.password) {
-            setError("Email and Password are required");
-            return;
-        }
-
-        try {
-            const res = await axios.post('/api/auth/login', form);
-            loginUser(res.data.user);
-            navigate('/');
-        } catch (err) {
-            setError(err.response?.data?.message || 'Login failed');
-        }
-    };
-
-    {
-        error && (
-            <div className="text-red-600 bg-red-100 border border-red-300 p-2 rounded mb-3">
-                {error}
-            </div>
-        )
+    if (!form.email || !form.password) {
+      setError("Email and Password are required");
+      return;
     }
 
+    try {
+      const res = await axios.post('/api/auth/login', form);
+      loginUser(res.data.user);
+      navigate('/');
+    } catch (err) {
+      setError(err.response?.data?.message || 'Login failed');
+    }
+  };
 
-    return (
-        <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-4">
-            {error && <div className="bg-red-100 text-red-700 p-2 rounded">{error}</div>}
+  return (
+    <section className="min-h-[90vh] bg-gradient-to-br from-blue-50 via-white to-blue-100 flex items-center justify-center px-4 py-12">
+      <div className="bg-white p-8 rounded-2xl shadow-md w-full max-w-md space-y-6">
+        <h2 className="text-3xl font-bold text-center text-blue-700">Sign In to EventApp</h2>
 
-            <input placeholder="Email" className="border p-2 w-full" onChange={e => setForm({ ...form, email: e.target.value })} />
-            <input type="password" placeholder="Password" className="border p-2 w-full" onChange={e => setForm({ ...form, password: e.target.value })} />
+        {error && (
+          <div className="bg-red-100 text-red-700 border border-red-300 p-2 rounded text-sm">
+            {error}
+          </div>
+        )}
 
-            <button type="submit" className="bg-blue-600 text-white py-2 px-4 rounded">Login</button>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium mb-1 text-gray-700">Email</label>
+            <input
+              type="email"
+              placeholder="example@email.com"
+              className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+              onChange={e => setForm({ ...form, email: e.target.value })}
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium mb-1 text-gray-700">Password</label>
+            <input
+              type="password"
+              placeholder="********"
+              className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+              onChange={e => setForm({ ...form, password: e.target.value })}
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-2 rounded font-medium hover:bg-blue-700 transition"
+          >
+            Login
+          </button>
         </form>
-    );
+      </div>
+    </section>
+  );
 }
