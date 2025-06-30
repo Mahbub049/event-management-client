@@ -22,12 +22,15 @@ export default function Events() {
 
   const handleJoin = async (id) => {
     try {
-      await axios.patch(`/api/events/join/${id}`);
+      await axios.patch(`/api/events/join/${id}`, {
+        user: user.name
+      });
       fetchEvents();
     } catch (err) {
       alert('❌ Already joined or error occurred!');
     }
   };
+
 
   const filteredEvents = events.filter((event) => {
     const matchTitle = event.title.toLowerCase().includes(search.toLowerCase());
