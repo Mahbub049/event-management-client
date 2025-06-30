@@ -28,7 +28,7 @@ export default function Login() {
   };
 
   return (
-    <section className="min-h-[90vh] bg-gradient-to-br from-blue-50 via-white to-blue-100 flex items-center justify-center px-4 py-12">
+    <section className="font-montserrat min-h-[90vh] bg-gradient-to-br from-blue-50 via-white to-blue-100 flex items-center justify-center px-4 py-12">
       <div className="bg-white p-8 rounded-2xl shadow-md w-full max-w-md space-y-6">
         <h2 className="text-3xl font-bold text-center text-blue-700">Sign In to EventApp</h2>
 
