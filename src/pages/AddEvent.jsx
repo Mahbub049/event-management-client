@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import axios from '../api/axiosInstance';
 import { AuthContext } from '../context/AuthContext';
+import Swal from 'sweetalert2';
 
 export default function AddEvent() {
   const { user } = useContext(AuthContext);
@@ -23,7 +24,11 @@ export default function AddEvent() {
     e.preventDefault();
     try {
       await axios.post('/api/events/add', form);
-      setMessage('✅ Event added successfully!');
+      Swal.fire({
+        title: "Submitted!",
+        text: "Thanks for adding event!",
+        icon: "success"
+      });
       setForm({ title: '', name: user.name, date: '', time: '', location: '', description: '' });
     } catch (err) {
       setMessage('❌ Failed to add event. Try again.');
@@ -37,9 +42,8 @@ export default function AddEvent() {
 
         {message && (
           <div
-            className={`mb-5 px-4 py-3 rounded text-center font-medium ${
-              message.startsWith('✅') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-            }`}
+            className={`mb-5 px-4 py-3 rounded text-center font-medium ${message.startsWith('✅') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+              }`}
           >
             {message}
           </div>

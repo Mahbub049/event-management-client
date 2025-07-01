@@ -8,7 +8,7 @@ export default function Home() {
         
         {/* Title */}
         <h1 className="text-4xl md:text-5xl font-extrabold text-blue-700 leading-tight tracking-tight">
-          Welcome to <span className="text-gray-900">EventApp</span> 🎉
+          Welcome to <span className="text-gray-900">EventApp</span>
         </h1>
 
         {/* Description */}

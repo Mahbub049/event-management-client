@@ -1,8 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import axios from '../api/axiosInstance';
 import moment from 'moment';
+import { AuthContext } from '../context/AuthContext';
+import Swal from 'sweetalert2';
 
 export default function Events() {
+  const { user } = useContext(AuthContext);
   const [events, setEvents] = useState([]);
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('');
@@ -27,7 +30,11 @@ export default function Events() {
       });
       fetchEvents();
     } catch (err) {
-      alert('❌ Already joined or error occurred!');
+      Swal.fire({
+        title: "Joined!",
+        text: "You already joined!",
+        icon: "error"
+      });
     }
   };
 

@@ -27,12 +27,16 @@ export default function MyEvent() {
       await axios.delete(`/api/events/delete/${id}`);
       fetchMyEvents();
       Swal.fire({
-        title: "Good job!",
-        text: "You clicked the button!",
+        title: "Deleted!",
+        text: "You deleted the event!",
         icon: "success"
       });
     } catch (err) {
-      alert('❌ Failed to delete event');
+      Swal.fire({
+        title: "Not Allowed",
+        text: "Error Occured!",
+        icon: "error"
+      });
     }
   };
 
@@ -41,8 +45,17 @@ export default function MyEvent() {
       await axios.put(`/api/events/update/${editData._id}`, editData);
       setEditData(null);
       fetchMyEvents();
+      Swal.fire({
+        title: "Updated!",
+        text: "You updated the information!",
+        icon: "success"
+      });
     } catch (err) {
-      alert('❌ Update failed');
+      Swal.fire({
+        title: "Failed!",
+        text: "Update Failed!",
+        icon: "error"
+      });
     }
   };
 

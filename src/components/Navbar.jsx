@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import { SiEventbrite } from 'react-icons/si';
 
 export default function Navbar() {
   const { user, logoutUser } = useContext(AuthContext);
@@ -17,7 +18,10 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
         {/* Brand Logo */}
         <Link to="/" className="text-2xl font-bold tracking-wide hover:text-gray-200 transition">
-          🎉 EventApp
+          
+          <div className='flex gap-2 items-center '>
+            <SiEventbrite /> EventApp
+          </div>
         </Link>
 
         {/* Navigation Links */}
